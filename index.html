@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trend Zone | Luxury Streetwear & Couture</title>
-    
+
+    <!-- ============================
+         EXTERNAL CSS & FONTS
+    ============================= -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 
+    <!-- ============================
+         INTERNAL CSS STYLES
+         (ALL SECTIONS COMMENTED)
+    ============================= -->
     <style>
+
+        /* ---------------------------------
+           ROOT COLOR VARIABLES
+        ----------------------------------*/
         :root {
             --primary: #000000;
             --accent: #c5a059;
@@ -20,102 +31,391 @@
             --transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* --- Reset & Base --- */
+        /* ---------------------------------
+           GLOBAL RESET & BASE SETTINGS
+        ----------------------------------*/
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Outfit', sans-serif; background: #fff; color: var(--primary); overflow-x: hidden; }
         ul { list-style: none; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
-        button { border: none; background: none; cursor: pointer; font-family: inherit; }
 
-        /* --- Section Transitions --- */
+        /* ---------------------------------
+           GLOBAL SECTION PADDING + TITLES
+        ----------------------------------*/
         .section-padding { padding: 100px 5%; }
         .title-group { text-align: center; margin-bottom: 60px; }
         .title-group h2 { font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 10px; }
         .title-group p { text-transform: uppercase; letter-spacing: 3px; color: #888; font-size: 0.8rem; }
 
-        /* --- 1. PRO NAVIGATION & MOBILE MENU --- */
-        header { position: fixed; width: 100%; top: 0; z-index: 1000; transition: var(--transition); padding: 20px 5%; }
-        header.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 15px 5%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        /* =====================================================
+           1. HEADER + NAVIGATION + MOBILE SIDE DRAWER
+        ====================================================== */
 
-        .nav-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
-        .logo { font-family: 'Playfair Display'; font-size: 1.8rem; font-weight: 800; letter-spacing: 2px; }
-        
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .nav-links a:hover { color: var(--accent); }
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 20px 5%;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 15px 5%;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display';
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         .nav-icons { display: flex; gap: 20px; font-size: 1.1rem; }
         .menu-btn { display: none; font-size: 1.4rem; }
 
-        /* Mobile Side Drawer */
-        .side-drawer { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: white; z-index: 2000; transition: 0.6s; padding: 100px 10%; display: flex; flex-direction: column; gap: 30px; }
+        /* --- MOBILE SIDE DRAWER MENU --- */
+        .side-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            transition: 0.6s;
+            padding: 100px 10%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
         .side-drawer.active { right: 0; }
         .side-drawer a { font-size: 2.5rem; font-family: 'Playfair Display'; font-weight: 700; }
         .close-drawer { position: absolute; top: 30px; right: 30px; font-size: 2rem; }
 
-        /* --- 2. HERO SLIDER --- */
+        /* =====================================================
+           2. HERO SECTION (FULL SCREEN SLIDER)
+        ====================================================== */
         .hero { height: 100vh; background: #000; }
         .swiper { width: 100%; height: 100%; }
-        .hero-slide { background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; position: relative; }
-        .hero-slide::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.3); }
-        .hero-text { position: relative; z-index: 10; text-align: center; color: white; max-width: 800px; }
-        .hero-text h1 { font-family: 'Playfair Display'; font-size: 5rem; line-height: 1.1; margin-bottom: 25px; }
-        .hero-text span { display: block; margin-bottom: 20px; letter-spacing: 5px; font-size: 0.9rem; text-transform: uppercase; }
-        
-        .btn-luxury { padding: 18px 45px; border: 1px solid white; color: white; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; transition: 0.4s; }
-        .btn-luxury:hover { background: white; color: black; }
 
-        /* --- 3. BRAND VALUES --- */
-        .values { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; background: var(--grey); text-align: center; }
-        .value-card i { font-size: 2rem; color: var(--accent); margin-bottom: 20px; }
-        .value-card h4 { margin-bottom: 10px; text-transform: uppercase; font-size: 0.9rem; }
+        .hero-slide {
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
 
-        /* --- 4. CATEGORY TILES --- */
-        .cat-grid { display: grid; grid-template-columns: 1fr 1fr; height: 80vh; gap: 0; }
-        .cat-box { position: relative; overflow: hidden; cursor: pointer; }
-        .cat-box img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s; }
-        .cat-box:hover img { transform: scale(1.1); }
-        .cat-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; }
-        .cat-overlay h2 { font-family: 'Playfair Display'; font-size: 3.5rem; }
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+        }
 
-        /* --- 5. PRODUCT FILTER SECTION --- */
-        .filter-nav { display: flex; justify-content: center; gap: 30px; margin-bottom: 50px; }
-        .filter-btn { font-weight: 600; text-transform: uppercase; font-size: 0.8rem; padding-bottom: 5px; border-bottom: 2px solid transparent; opacity: 0.5; }
-        .filter-btn.active { opacity: 1; border-color: var(--accent); }
+        .hero-text {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+        }
 
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .product-card { position: relative; text-align: center; }
-        .img-wrap { position: relative; overflow: hidden; aspect-ratio: 3/4; margin-bottom: 15px; background: #f9f9f9; }
-        .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
-        .product-card:hover img { transform: scale(1.05); }
-        .add-btn { position: absolute; bottom: -50px; left: 0; width: 100%; background: black; color: white; padding: 15px; transition: 0.4s; font-size: 0.8rem; }
-        .product-card:hover .add-btn { bottom: 0; }
+        .hero-text h1 {
+            font-family: 'Playfair Display';
+            font-size: 5rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
 
-        /* --- 6. PROMO PARALLAX --- */
-        .parallax { height: 60vh; background-image: url('https://images.unsplash.com/photo-1445205170230-053b830c6050?q=80&w=2071'); background-attachment: fixed; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
+        .btn-luxury {
+            padding: 18px 45px;
+            border: 1px solid white;
+            color: white;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: 0.4s;
+        }
 
-        /* --- 7. LOOKBOOK SECTION --- */
-        .lookbook-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .look-item { height: 600px; background-size: cover; background-position: center; }
+        .btn-luxury:hover {
+            background: white;
+            color: black;
+        }
 
-        /* --- 8. NEWSLETTER --- */
-        .newsletter { background: #111; color: white; text-align: center; padding: 80px 5%; }
-        .newsletter input { background: transparent; border: none; border-bottom: 1px solid #444; padding: 15px; width: 100%; max-width: 400px; color: white; outline: none; margin-bottom: 20px; }
+        /* =====================================================
+           3. BRAND VALUES (GLOBAL SHIPPING, RETURNS, SECURE)
+        ====================================================== */
+        .values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            background: var(--grey);
+            text-align: center;
+        }
 
-        /* --- 9. CONTACT SECTION --- */
-        .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-        .contact-form input, .contact-form textarea { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; outline: none; }
-        .btn-dark { background: black; color: white; padding: 18px 45px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+        .value-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
 
-        /* --- FOOTER --- */
-        footer { background: #000; color: #777; padding: 80px 5% 20px; border-top: 1px solid #222; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 60px; }
-        .footer-col h4 { color: #fff; margin-bottom: 20px; text-transform: uppercase; font-size: 0.8rem; }
-        .footer-col li { margin-bottom: 12px; font-size: 0.9rem; }
-        .social-links { display: flex; gap: 20px; font-size: 1.2rem; margin-top: 20px; }
+        .value-card h4 {
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
 
-        /* --- RESPONSIVE FIXES --- */
+        /* =====================================================
+           4. MEN / WOMEN CATEGORY GRID
+        ====================================================== */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 80vh;
+        }
+
+        .cat-box {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .cat-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 1.2s;
+        }
+
+        .cat-box:hover img {
+            transform: scale(1.1);
+        }
+
+        .cat-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .cat-overlay h2 {
+            font-family: 'Playfair Display';
+            font-size: 3.5rem;
+        }
+        /* =====================================================
+           5. PRODUCT SHOP + FILTERS + PRODUCT GRID
+        ====================================================== */
+        .filter-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .filter-btn {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            opacity: 0.5;
+        }
+
+        .filter-btn.active {
+            opacity: 1;
+            border-color: var(--accent);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .img-wrap {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            background: #f9f9f9;
+            margin-bottom: 15px;
+        }
+
+        .img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.6s;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .add-btn {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            background: black;
+            color: white;
+            padding: 15px;
+            font-size: 0.8rem;
+            transition: 0.4s;
+        }
+
+        .product-card:hover .add-btn {
+            bottom: 0;
+        }
+
+        /* =====================================================
+           6. PARALLAX PROMO BANNER
+        ====================================================== */
+        .parallax {
+            height: 60vh;
+            background-image: url('https://images.unsplash.com/photo-1445205170230-053b830c6050?q=80&w=2071');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        /* =====================================================
+           7. LOOKBOOK GRID
+        ====================================================== */
+        .lookbook-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .look-item {
+            height: 600px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* =====================================================
+           8. NEWSLETTER SUBSCRIBE BOX
+        ====================================================== */
+        .newsletter {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 80px 5%;
+        }
+
+        .newsletter input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #444;
+            padding: 15px;
+            width: 100%;
+            max-width: 400px;
+            outline: none;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        /* =====================================================
+           9. CONTACT SECTION
+        ====================================================== */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .btn-dark {
+            background: black;
+            color: white;
+            padding: 18px 45px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+
+        /* =====================================================
+           10. FOOTER SECTION
+        ====================================================== */
+        footer {
+            background: #000;
+            color: #777;
+            padding: 80px 5% 20px;
+            border-top: 1px solid #222;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-size: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        /* =====================================================
+           RESPONSIVE FIXES
+        ====================================================== */
         @media (max-width: 992px) {
             .hero-text h1 { font-size: 3rem; }
             .nav-links { display: none; }
@@ -124,10 +424,15 @@
             .cat-box { height: 50vh; }
             .contact-wrap { grid-template-columns: 1fr; }
         }
+
     </style>
 </head>
+
 <body>
 
+    <!-- =========================================================
+         MOBILE SIDE DRAWER MENU
+    ============================================================ -->
     <div class="side-drawer" id="sideDrawer">
         <button class="close-drawer" onclick="toggleMenu()">&times;</button>
         <a href="#home" onclick="toggleMenu()">Home</a>
@@ -136,16 +441,24 @@
         <a href="#contact" onclick="toggleMenu()">Contact</a>
     </div>
 
+    <!-- =========================================================
+         HEADER: NAVIGATION BAR
+    ============================================================ -->
     <header id="header">
         <div class="nav-inner">
-            <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars-staggered"></i></button>
+            <button class="menu-btn" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+
             <div class="logo">TREND ZONE</div>
+
             <nav class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#shop">Shop</a>
                 <a href="#lookbook">Lookbook</a>
                 <a href="#contact">Contact</a>
             </nav>
+
             <div class="nav-icons">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <i class="fa-solid fa-bag-shopping"></i>
@@ -153,224 +466,1183 @@
         </div>
     </header>
 
+    <!-- =========================================================
+         HERO SLIDER SECTION
+    ============================================================ -->
     <section class="hero" id="home">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070');">
+
+                <!-- Slide 1 -->
+                <div class="swiper-slide hero-slide"
+                     style="background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070');">
                     <div class="hero-text">
                         <span data-aos="fade-up">New Collection 2026</span>
                         <h1 data-aos="fade-up" data-aos-delay="200">THE ART OF STYLE</h1>
-                        <a href="#shop" class="btn-luxury" data-aos="fade-up" data-aos-delay="400">Discover Now</a>
+                        <a class="btn-luxury" href="#shop" data-aos="fade-up" data-aos-delay="400">Discover Now</a>
                     </div>
                 </div>
-                <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?q=80&w=2070');">
+
+                <!-- Slide 2 -->
+                <div class="swiper-slide hero-slide"
+                     style="background-image: url('https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?q=80&w=2070');">
                     <div class="hero-text">
                         <span>Summer Drop</span>
                         <h1>URBAN ESSENTIALS</h1>
-                        <a href="#shop" class="btn-luxury">Shop Collection</a>
+                        <a class="btn-luxury" href="#shop">Shop Collection</a>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
+    <!-- =========================================================
+         BRAND VALUES SECTION
+    ============================================================ -->
     <section class="section-padding values">
+
         <div class="value-card" data-aos="fade-up">
             <i class="fa-solid fa-truck-fast"></i>
             <h4>Global Shipping</h4>
             <p>Free express delivery on orders over $200.</p>
         </div>
+
         <div class="value-card" data-aos="fade-up" data-aos-delay="100">
-            <i class="fa-solid fa-shield-check"></i>
+            <i class="fa-solid fa-shield-halved"></i>
             <h4>Secure Payments</h4>
             <p>100% encrypted checkout experience.</p>
         </div>
+
         <div class="value-card" data-aos="fade-up" data-aos-delay="200">
             <i class="fa-solid fa-rotate-left"></i>
             <h4>30-Day Returns</h4>
             <p>Not the right fit? Send it back for free.</p>
         </div>
+
     </section>
 
-    <section class="cat-grid">
-        <div class="cat-box" data-aos="fade-right">
-            <img src="https://images.unsplash.com/photo-1488161628813-244aa2f8ce73?q=80&w=1964" alt="Men">
-            <div class="cat-overlay">
-                <h2>MEN</h2>
-                <a href="#shop" class="btn-luxury">Explore</a>
-            </div>
-        </div>
-        <div class="cat-box" data-aos="fade-left">
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920" alt="Women">
-            <div class="cat-overlay">
-                <h2>WOMEN</h2>
-                <a href="#shop" class="btn-luxury">Explore</a>
-            </div>
-        </div>
-    </section>
+<!-- =========================================================
+     MEN / WOMEN CATEGORY — ULTRA NEXT LEVEL UI
+============================================================ -->
+<section class="category-section">
 
-    <section class="section-padding" id="shop">
-        <div class="title-group" data-aos="fade-up">
-            <p>Curated Selection</p>
-            <h2>Bestsellers</h2>
+    <!-- MEN -->
+    <div class="cat-card" data-aos="fade-right">
+        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+        <div class="cat-layer"></div>
+
+        <div class="cat-content">
+            <h1 class="cat-big">MEN</h1>
+            <h3 class="cat-small">Essentials • Streetwear • Classics</h3>
+
+            <a href="#shop" class="cat-btn">Explore Collection</a>
+        </div>
+    </div>
+
+    <!-- WOMEN -->
+    <div class="cat-card" data-aos="fade-left">
+        <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+        <div class="cat-layer"></div>
+
+        <div class="cat-content">
+            <h1 class="cat-big">WOMEN</h1>
+            <h3 class="cat-small">Elegance • Modern • Premium</h3>
+
+            <a href="#shop" class="cat-btn">Explore Collection</a>
+        </div>
+    </div>
+
+</section>
+
+<style>
+/* Outer Section */
+.category-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    padding: 70px 20px;
+}
+
+/* Card Container */
+.cat-card {
+    position: relative;
+    height: 520px;
+    border-radius: 30px;
+    overflow: hidden;
+    cursor: pointer;
+    transform: scale(1);
+    transition: 0.5s ease;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Hover Elevation */
+.cat-card:hover {
+    transform: scale(1.03);
+}
+
+/* Background Image */
+.cat-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 1s ease-in-out;
+}
+
+/* Cool Parallax Zoom */
+.cat-card:hover img {
+    transform: scale(1.15);
+}
+
+/* Blurred Dark Overlay */
+.cat-layer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.85));
+    backdrop-filter: blur(2px);
+}
+
+/* Content Area */
+.cat-content {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    z-index: 3;
+    color: white;
+}
+
+/* Big Title (DIOR style) */
+.cat-big {
+    font-size: 4rem;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+    animation: fadeUp 0.7s ease forwards;
+}
+
+/* Subtitle */
+.cat-small {
+    font-size: 1.1rem;
+    margin-top: 8px;
+    opacity: 0.85;
+}
+
+/* Button */
+.cat-btn {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px 25px;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 30px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    backdrop-filter: blur(4px);
+    transition: 0.3s ease;
+}
+
+.cat-btn:hover {
+    background: #d32f2f;
+    border-color: #d32f2f;
+    transform: translateY(-3px);
+}
+
+/* FadeUp Animation */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .category-section {
+        grid-template-columns: 1fr;
+    }
+    .cat-card {
+        height: 420px;
+    }
+    .cat-big {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .cat-card {
+        height: 350px;
+    }
+    .cat-big {
+        font-size: 2.4rem;
+    }
+}
+</style>
+
+<!-- =========================================================
+     SHOP / BESTSELLERS SECTION — NEXT LEVEL (INDIAN PRICES + FILTER + 3D UI)
+============================================================ -->
+<section class="section-padding" id="shop">
+
+    <div class="title-group" data-aos="fade-up">
+        <p>Curated Selection</p>
+        <h2>Bestsellers</h2>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-nav" data-aos="fade-up">
+        <button class="filter-btn active" onclick="filterProducts('all')">All</button>
+        <button class="filter-btn" onclick="filterProducts('men')">Men</button>
+        <button class="filter-btn" onclick="filterProducts('women')">Women</button>
+        <button class="filter-btn" onclick="filterProducts('acc')">Accessories</button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid">
+
+        <!-- MEN -->
+        <div class="product-card" data-category="men" data-aos="fade-up">
+            <div class="img-wrap">
+                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1920">
+                <button class="add-btn" onclick="addToBag('Raw Denim Jacket')">ADD TO BAG</button>
+            </div>
+            <h3>Raw Denim Jacket</h3>
+            <p>₹9,999</p>
         </div>
 
-        <div class="filter-nav" data-aos="fade-up">
-            <button class="filter-btn active">All Items</button>
-            <button class="filter-btn">Men</button>
-            <button class="filter-btn">Women</button>
-            <button class="filter-btn">Accessories</button>
+        <div class="product-card" data-category="men" data-aos="fade-up" data-aos-delay="100">
+            <div class="img-wrap">
+                <img src="https://plus.unsplash.com/premium_photo-1760395451223-394a32e7dee0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                <button class="add-btn" onclick="addToBag('Wool Trench Coat')">ADD TO BAG</button>
+            </div>
+            <h3>Wool Trench Coat</h3>
+            <p>₹28,999</p>
         </div>
 
-        <div class="product-grid">
-            <div class="product-card" data-aos="fade-up">
-                <div class="img-wrap">
-                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1920" alt="Denim">
-                    <button class="add-btn">ADD TO BAG</button>
-                </div>
-                <h3>Raw Denim Jacket</h3>
-                <p>$120.00</p>
+        <!-- WOMEN -->
+        <div class="product-card" data-category="women" data-aos="fade-up" data-aos-delay="200">
+            <div class="img-wrap">
+                <img src="https://images.unsplash.com/photo-1534233812932-59b8fa1b780c?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                <button class="add-btn" onclick="addToBag('Leather Chelsea Boots')">ADD TO BAG</button>
             </div>
-            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="img-wrap">
-                    <img src="https://images.unsplash.com/photo-1539106604051-9b9992305541?q=80&w=1974" alt="Coat">
-                    <button class="add-btn">ADD TO BAG</button>
-                </div>
-                <h3>Wool Trench Coat</h3>
-                <p>$350.00</p>
-            </div>
-            <div class="product-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="img-wrap">
-                    <img src="https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=1920" alt="Boots">
-                    <button class="add-btn">ADD TO BAG</button>
-                </div>
-                <h3>Leather Chelsea Boots</h3>
-                <p>$210.00</p>
-            </div>
-            <div class="product-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="img-wrap">
-                    <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=2070" alt="Sweatshirt">
-                    <button class="add-btn">ADD TO BAG</button>
-                </div>
-                <h3>Minimalist Hoodie</h3>
-                <p>$85.00</p>
-            </div>
+            <h3>Leather Chelsea Boots</h3>
+            <p>₹16,499</p>
         </div>
-    </section>
 
-    <section class="parallax">
-        <div data-aos="zoom-in">
-            <h2 style="font-family: 'Playfair Display'; font-size: 4rem;">Sustainability Matters</h2>
-            <p style="letter-spacing: 2px;">100% ORGANIC COTTON & ETHICAL LABOR</p>
-        </div>
-    </section>
-
-    <section class="section-padding" id="lookbook">
-        <div class="title-group" data-aos="fade-up">
-            <p>Inspiration</p>
-            <h2>Journal / Lookbook</h2>
-        </div>
-        <div class="lookbook-grid">
-            <div class="look-item" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070');" data-aos="fade-right"></div>
-            <div class="look-item" style="background-image: url('https://images.unsplash.com/photo-1445205170230-053b830c6050?q=80&w=2071');" data-aos="fade-left"></div>
-        </div>
-    </section>
-
-    <section class="newsletter">
-        <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 20px;">Join the Club</h2>
-        <p style="color: #888; margin-bottom: 40px;">Get exclusive access to drops and 15% off your first order.</p>
-        <div data-aos="fade-up">
-            <input type="email" placeholder="Email Address">
-            <br>
-            <button class="btn-luxury" style="border-color: #444;">Subscribe</button>
-        </div>
-    </section>
-
-    <section class="section-padding" id="contact">
-        <div class="contact-wrap">
-            <div class="contact-info" data-aos="fade-right">
-                <h2 style="font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 30px;">Get in Touch</h2>
-                <p style="margin-bottom: 20px;">Support: hello@trendzone.com</p>
-                <p style="margin-bottom: 20px;">Press: press@trendzone.com</p>
-                <div class="social-links">
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-tiktok"></i>
-                    <i class="fa-brands fa-pinterest"></i>
-                </div>
+        <!-- ACCESSORIES -->
+        <div class="product-card" data-category="acc" data-aos="fade-up" data-aos-delay="300">
+            <div class="img-wrap">
+                <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=2070">
+                <button class="add-btn" onclick="addToBag('Minimalist Hoodie')">ADD TO BAG</button>
             </div>
-            <form class="contact-form" data-aos="fade-left">
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Email">
-                <textarea rows="5" placeholder="Message"></textarea>
-                <button class="btn-dark">Send Message</button>
-            </form>
+            <h3>Minimalist Hoodie</h3>
+            <p>₹5,499</p>
         </div>
-    </section>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4 class="logo" style="color: white; font-size: 1.5rem;">Trend Zone</h4>
-                <p>Leading the way in high-quality fashion for the modern era.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Customer Service</h4>
-                <ul>
-                    <li>Order Tracking</li>
-                    <li>Shipping & Returns</li>
-                    <li>Size Guide</li>
-                    <li>Contact Us</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>About Us</h4>
-                <ul>
-                    <li>Our Story</li>
-                    <li>Sustainability</li>
-                    <li>Careers</li>
-                    <li>Stores</li>
-                </ul>
-            </div>
-        </div>
-        <div style="text-align: center; font-size: 0.8rem; border-top: 1px solid #111; padding-top: 20px;">
-            &copy; 2026 TREND ZONE LUXURY RETAIL. ALL RIGHTS RESERVED.
-        </div>
-    </footer>
+    </div>
 
+</section>
+
+<!-- =========================================================
+     SHOP FUNCTIONALITY (FILTER + ADD TO BAG ALERT)
+============================================================ -->
+<script>
+// Filter System
+function filterProducts(category) {
+    const cards = document.querySelectorAll(".product-card");
+    const buttons = document.querySelectorAll(".filter-btn");
+
+    buttons.forEach(btn => btn.classList.remove("active"));
+    event.target.classList.add("active");
+
+    cards.forEach(card => {
+        card.style.display = 
+            category === 'all' || card.dataset.category === category
+            ? 'block'
+            : 'none';
+    });
+}
+
+// Add to Bag Message
+function addToBag(item) {
+    alert(item + " added to your bag ❤️");
+}
+</script>
+
+<!-- =========================================================
+     SHOP 3D LUXURY CSS
+============================================================ -->
+<style>
+/* Title */
+.title-group h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+/* Filter Buttons */
+.filter-nav {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: none;
+    background: #eee;
+    margin: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: #d32f2f;
+    color: white;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+}
+
+/* Card */
+.product-card {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.20);
+}
+
+/* Image Wrapper */
+.img-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.img-wrap img {
+    width: 100%;
+    height: 330px;
+    object-fit: cover;
+    transition: 0.4s ease;
+}
+
+.img-wrap:hover img {
+    transform: scale(1.07);
+}
+
+/* Add to Bag Button */
+.add-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    opacity: 0;
+    transition: 0.4s ease;
+}
+
+.img-wrap:hover .add-btn {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+/* Product Name */
+.product-card h3 {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* Price */
+.product-card p {
+    font-size: 1.1rem;
+    color: #d32f2f;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .img-wrap img {
+        height: 250px;
+    }
+}
+</style>
+
+
+<!-- =========================================================
+     PARALLAX PROMO SECTION (NEXT LEVEL)
+============================================================ -->
+<section class="parallax" id="sustain">
+
+    <div class="parallax-content" data-aos="zoom-in">
+        <h2 class="parallax-title">Sustainability Matters</h2>
+        <p class="parallax-sub">100% ORGANIC COTTON & ETHICAL LABOR</p>
+    </div>
+
+</section>
+
+<!-- =========================================================
+     PARALLAX CSS
+============================================================ -->
+<style>
+/* Parallax Section */
+.parallax {
+    background-image: url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=2070');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* TRUE PARALLAX */
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Dark overlay for luxury look */
+.parallax::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(2px);
+}
+
+/* Content */
+.parallax-content {
+    position: relative;
+    text-align: center;
+    color: white;
+    z-index: 2;
+}
+
+/* Title */
+.parallax-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    animation: fadeUp 1.2s ease;
+}
+
+/* Subtitle */
+.parallax-sub {
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    color: #f1f1f1;
+    animation: fadeUp 1.6s ease;
+}
+
+/* Fade Animation */
+@keyframes fadeUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .parallax {
+        height: 55vh;
+    }
+    .parallax-title {
+        font-size: 2.7rem;
+    }
+    .parallax-sub {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+}
+</style>
+
+<!-- =========================================================
+     LOOKBOOK SECTION (AUTO SLIDER + NEXT-LEVEL)
+============================================================ -->
+<section class="section-padding" id="lookbook">
+
+    <div class="title-group" data-aos="fade-up">
+        <p class="lookbook-sub">Inspiration</p>
+        <h2 class="lookbook-title">Journal / Lookbook</h2>
+        <div class="lookbook-line"></div>
+    </div>
+
+    <!-- Slider Wrapper -->
+    <div class="lookbook-slider" data-aos="fade-up">
+
+        <div class="lookbook-track">
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+            </div>
+
+            <div class="slide">
+                <img src="https://plus.unsplash.com/premium_photo-1664202525979-80d1da46b34b?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1630905119003-329447458f85?q=80&w=1161&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+            </div>
+
+        </div>
+
+        <!-- Arrows -->
+        <div class="slider-btn prev" onclick="moveSlide(-1)">❮</div>
+        <div class="slider-btn next" onclick="moveSlide(1)">❯</div>
+
+    </div>
+
+    <!-- Slider Dots -->
+    <div class="lookbook-dots" id="lookbookDots"></div>
+
+</section>
+
+<!-- =========================================================
+     LOOKBOOK JS (AUTO + CONTROLS)
+============================================================ -->
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+const track = document.querySelector(".lookbook-track");
+const dotsContainer = document.getElementById("lookbookDots");
+
+function showDots() {
+    dotsContainer.innerHTML = "";
+    slides.forEach((_, i) => {
+        dotsContainer.innerHTML += `<div class="dot ${i===0?'active':''}" onclick="goToSlide(${i})"></div>`;
+    });
+}
+showDots();
+
+function updateSlider() {
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    document.querySelectorAll(".dot").forEach((dot, idx) => {
+        dot.classList.toggle("active", idx === currentSlide);
+    });
+}
+
+function moveSlide(step) {
+    currentSlide = (currentSlide + step + slides.length) % slides.length;
+    updateSlider();
+}
+
+function goToSlide(i) {
+    currentSlide = i;
+    updateSlider();
+}
+
+// Auto Slide
+setInterval(() => moveSlide(1), 4000);
+</script>
+
+<!-- =========================================================
+     LOOKBOOK CSS (PRO SLIDER + 3D + RESPONSIVE)
+============================================================ -->
+<style>
+.lookbook-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+}
+
+.lookbook-line {
+    width: 80px;
+    height: 3px;
+    background: #d32f2f;
+    margin: 10px auto 30px;
+    border-radius: 10px;
+}
+
+/* Slider Container */
+.lookbook-slider {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* Track */
+.lookbook-track {
+    display: flex;
+    transition: 0.6s ease-in-out;
+    width: 100%;
+}
+
+/* Each slide */
+.slide {
+    min-width: 100%;
+    transition: 0.4s ease;
+}
+
+.slide img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: 0.4s ease;
+}
+
+.slide img:hover {
+    transform: scale(1.03);
+}
+
+/* Arrows */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    padding: 12px 18px;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transform: translateY(-50%);
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.slider-btn:hover {
+    background: rgba(211,47,47,0.8);
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Dots */
+.lookbook-dots {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #bbb;
+    margin: 0 6px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: #d32f2f;
+    transform: scale(1.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .slide img {
+        height: 330px;
+    }
+    .slider-btn {
+        font-size: 1.5rem;
+        padding: 8px 12px;
+    }
+}
+</style>
+
+   <!-- =========================================================
+     NEWSLETTER SUBSCRIPTION (UPGRADED - FULL WORKING)
+============================================================ -->
+<section class="newsletter">
+
+    <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem;color: #888;">Join the Club</h2>
+    <p style="color: #888; margin-bottom: 40px;margin-top: 10px;">
+        Get exclusive access to drops and 15% off your first order.
+    </p>
+
+    <div class="newsletter-box" data-aos="fade-up">
+
+        <input type="email" id="newsletterEmail" placeholder="Email Address">
+
+        <small class="error" id="newsletterError"></small>
+
+        <button class="btn-luxury" id="newsletterBtn" style="border-color: #444;">
+            Subscribe
+        </button>
+
+        <p class="success" id="newsletterSuccess"></p>
+
+    </div>
+
+</section>
+
+<!-- =========================================================
+     NEWSLETTER SCRIPT (VALIDATION + SUCCESS)
+============================================================ -->
+<script>
+document.getElementById("newsletterBtn").addEventListener("click", function () {
+
+    let email = document.getElementById("newsletterEmail");
+    let error = document.getElementById("newsletterError");
+    let success = document.getElementById("newsletterSuccess");
+
+    let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if (!email.value.match(pattern)) {
+        error.innerHTML = "Please enter a valid email address";
+        success.innerHTML = "";
+        return;
+    }
+
+    // If valid
+    error.innerHTML = "";
+    success.innerHTML = "🎉 You’re subscribed successfully!";
+
+    // Reset input
+    email.value = "";
+
+    setTimeout(() => {
+        success.innerHTML = "";
+    }, 3000);
+});
+</script>
+
+<!-- =========================================================
+     NEWSLETTER 3D LUXURY CSS
+============================================================ -->
+<style>
+.newsletter {
+    text-align: center;
+    padding: 80px 20px;
+    background: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Box Around Input & Button */
+.newsletter-box {
+    background: #fff;
+    padding: 35px;
+    max-width: 480px;
+    margin: auto;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* Input Field */
+.newsletter-box input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 1.1rem;
+    outline: none;
+    transition: 0.3s ease;
+    margin-bottom: 8px;
+}
+
+.newsletter-box input:focus {
+    border-color: #d32f2f;
+    box-shadow: 0 0 10px rgba(211,47,47,0.3);
+}
+
+/* Button */
+.btn-luxury {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 14px;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    border: 2px solid #444;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-luxury:hover {
+    background: #d32f2f;
+    border-color: #d32f2f;
+    transform: translateY(-3px);
+}
+
+/* Error + Success Text */
+.error {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    display: block;
+    height: 12px;
+}
+
+.success {
+    color: green;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .newsletter-box {
+        padding: 25px;
+        border-radius: 14px;
+    }
+}
+</style>
+
+
+   <!-- =========================================================
+    CONTACT SECTION (UPGRADED - 3D UI + VALIDATION + REAL WORKING)
+============================================================ -->
+<section class="section-padding" id="contact">
+
+    <div class="contact-wrap">
+
+        <!-- LEFT SIDE -->
+        <div class="contact-info" data-aos="fade-right">
+            <h2 style="font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 30px;">
+                Get in Touch
+            </h2>
+
+            <p>Support: hello@trendzone.com</p>
+            <p>Press: press@trendzone.com</p>
+
+            <div class="social-links">
+                <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://tiktok.com" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://pinterest.com" target="_blank"><i class="fa-brands fa-pinterest"></i></a>
+            </div>
+        </div>
+
+        <!-- RIGHT FORM SIDE -->
+        <form class="contact-form" id="contactForm" data-aos="fade-left">
+
+            <!-- Name -->
+            <input type="text" id="name" placeholder="Name" />
+            <small class="error" id="nameError"></small>
+
+            <!-- Email -->
+            <input type="email" id="email" placeholder="Email" />
+            <small class="error" id="emailError"></small>
+
+            <!-- Message -->
+            <textarea rows="5" id="message" placeholder="Message"></textarea>
+            <small class="error" id="messageError"></small>
+
+            <button type="submit" class="btn-dark">Send Message</button>
+
+            <p class="success" id="successMsg"></p>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- ================= REAL TIME VALIDATION SCRIPT ================= -->
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let valid = true;
+
+    let name = document.getElementById("name");
+    let email = document.getElementById("email");
+    let message = document.getElementById("message");
+
+    let nameError = document.getElementById("nameError");
+    let emailError = document.getElementById("emailError");
+    let messageError = document.getElementById("messageError");
+    let successMsg = document.getElementById("successMsg");
+
+    // Validation
+    if (name.value.trim() === "") {
+        nameError.innerHTML = "Please enter your name";
+        valid = false;
+    } else {
+        nameError.innerHTML = "";
+    }
+
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.value.match(emailPattern)) {
+        emailError.innerHTML = "Enter a valid email";
+        valid = false;
+    } else {
+        emailError.innerHTML = "";
+    }
+
+    if (message.value.trim() === "") {
+        messageError.innerHTML = "Message cannot be empty";
+        valid = false;
+    } else {
+        messageError.innerHTML = "";
+    }
+
+    if (valid) {
+        successMsg.innerHTML = "Your message has been sent!";
+        name.value = "";
+        email.value = "";
+        message.value = "";
+
+        setTimeout(() => {
+            successMsg.innerHTML = "";
+        }, 3000);
+    }
+});
+</script>
+
+<!-- ================= CONTACT SECTION 3D CSS UI ================= -->
+<style>
+.contact-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    align-items: center;
+}
+
+.contact-form {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #d32f2f;
+    box-shadow: 0 0 10px rgba(211,47,47,0.3);
+}
+
+.btn-dark {
+    background: #000;
+    color: #fff;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-dark:hover {
+    background: #d32f2f;
+    transform: translateY(-3px);
+}
+
+.success {
+    margin-top: 10px;
+    color: green;
+    font-weight: 600;
+}
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+    height: 12px;
+}
+
+.social-links a {
+    font-size: 1.8rem;
+    color: #000;
+    margin-right: 15px;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: #d32f2f;
+    transform: scale(1.2);
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+    .contact-form {
+        padding: 25px;
+    }
+}
+</style>
+
+
+<!-- =========================================================
+     TREND ZONE – PREMIUM FOOTER (REAL DATA + 3D LOOK)
+============================================================ -->
+
+<footer style="background:#000;color:#fff;padding:60px 20px 20px;font-family:'Poppins', sans-serif;">
+
+    <div style="
+        max-width:1300px;
+        margin:auto;
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+        gap:40px;
+    ">
+
+        <!-- BRAND INFO -->
+        <div>
+            <h2 style="font-size:2rem;font-weight:700;margin-bottom:10px;">Trend Zone</h2>
+            <p style="color:#ccc;line-height:1.6;">
+                Premium fashion store delivering luxury designs, latest trends,
+                and top-quality outfits for every occasion.
+            </p>
+
+            <!-- SOCIAL MEDIA ICONS (REAL SVG) -->
+            <div style="margin-top:20px;display:flex;gap:18px;align-items:center;">
+
+                <!-- Facebook -->
+                <a href="https://facebook.com" target="_blank" style="color:white;">
+                    <svg width="28" height="28" fill="#fff">
+                        <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1 .9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.7l-.4 3h-2.3v7A10 10 0 0 0 22 12" />
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com" target="_blank" style="color:white;">
+                    <svg width="28" height="28" fill="#fff">
+                        <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.5.6.6.3 1 .6 1.5 1.1.5.4.8.9 1.1 1.5.3.5.5 1.3.6 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.6 2.5-.3.6-.6 1-1.1 1.5-.4.5-.9.8-1.5 1.1-.5.3-1.3.5-2.5.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.5-.6-.6-.3-1-.6-1.5-1.1-.5-.4-.8-.9-1.1-1.5-.3-.5-.5-1.3-.6-2.5-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-2 .6-2.5.3-.6.6-1 1.1-1.5.4-.5.9-.8 1.5-1.1.5-.3 1.3-.5 2.5-.6 1.3-.1 1.7-.1 4.9-.1"/>
+                        <circle cx="12" cy="12" r="3.2"/>
+                    </svg>
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://youtube.com" target="_blank" style="color:white;">
+                    <svg width="32" height="32" fill="#fff">
+                        <path d="M19.6 12.3 12.3 8v8.6l7.3-4.3z"/>
+                        <path d="M24.5 6.5c-.3-1.2-1.3-2.2-2.5-2.5C19.7 3.5 12 3.5 12 3.5s-7.7 0-10 .5c-1.2.3-2.2 1.3-2.5 2.5C-.5 8.8-.5 12-.5 12s0 3.2.5 5.5c.3 1.2 1.3 2.2 2.5 2.5 2.3.5 10 .5 10 .5s7.7 0 10-.5c1.2-.3 2.2-1.3 2.5-2.5.5-2.3.5-5.5.5-5.5s0-3.2-.5-5.5z"/>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- CUSTOMER SERVICE -->
+        <div>
+            <h3 style="margin-bottom:12px;font-size:1.3rem;">Customer Service</h3>
+            <ul style="list-style:none;padding:0;line-height:2;color:#ccc;">
+                <li>Order Tracking</li>
+                <li>Shipping & Returns</li>
+                <li>Size Guide</li>
+                <li>FAQ</li>
+                <li>Contact Support</li>
+            </ul>
+        </div>
+
+        <!-- ABOUT -->
+        <div>
+            <h3 style="margin-bottom:12px;font-size:1.3rem;">About Trend Zone</h3>
+            <ul style="list-style:none;padding:0;line-height:2;color:#ccc;">
+                <li>Our Story</li>
+                <li>Luxury Collection</li>
+                <li>Sustainability</li>
+                <li>Careers</li>
+                <li>Store Locator</li>
+            </ul>
+        </div>
+
+        <!-- GOOGLE MAP + CONTACT REAL -->
+        <div>
+            <h3 style="margin-bottom:12px;font-size:1.3rem;">Visit Us</h3>
+
+            <!-- Real Google Map Embed -->
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2758.947937035906!2d76.8051233!3d30.4855175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fc7923427ba0f%3A0xc082ccc2cb115009!2sTrend%20Zone!5e1!3m2!1sen!2sin!4v1705699999999"
+                width="130%" 
+                height="200" 
+                style="border:0;border-radius:12px;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+
+            <!-- REAL ADDRESS AND HOURS -->
+            <ul style="list-style:none;padding:0;line-height:2;margin-top:12px;color:#ccc;">
+                <li>📍 Durga Mandir Rd, Lalru, Mandi,<br>Punjab 140501</li>
+                <li>📞 +91 7888548428</li>
+ 
+               
+       
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <p style="text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #333;font-size:0.9rem;color:#777;">
+        © 2026 Trend Zone Luxury Fashion. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+    <!-- =========================================================
+         JAVASCRIPT (AOS, SWIPER, MENU, CART ALERT)
+    ============================================================ -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize AOS
-        AOS.init({ duration: 1000, once: true });
 
-        // Hero Slider
+    <script>
+
+        // INIT AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // HERO SWIPER SLIDER
         const swiper = new Swiper(".mySwiper", {
             loop: true,
             effect: "fade",
-            autoplay: { delay: 5000 },
+            autoplay: { delay: 5000 }
         });
 
-        // Sticky Header & Scroll Logic
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+        // STICKY HEADER ON SCROLL
+        window.addEventListener("scroll", () => {
+            const header = document.getElementById("header");
+            header.classList.toggle("scrolled", window.scrollY > 50);
         });
 
-        // Mobile Menu Toggle
+        // OPEN & CLOSE SIDE DRAWER
         function toggleMenu() {
-            document.getElementById('sideDrawer').classList.toggle('active');
+            document.getElementById("sideDrawer").classList.toggle("active");
         }
 
-        // Quick Cart Logic
-        document.querySelectorAll('.add-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                alert('Added to Bag!');
+        // ADD TO BAG ALERT
+        document.querySelectorAll(".add-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                alert("Added to Bag!");
             });
         });
+
     </script>
+
 </body>
 </html>
